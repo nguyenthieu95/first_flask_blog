@@ -9,7 +9,7 @@ conda create -n web python=3.6.5
 
 source activate web
 
-conda install flask
+conda install flask, flask-wtf
  
 ```
 
@@ -42,6 +42,8 @@ We will use the debug mode by edit configurations --> choice: FLASK_DEBUG
 # Some functions in Flask
 ```sh
 render_template:    Use to render our template
-url_for:            Use to find the static url
-
+url_for:            Use to find the static url (input is: name of function handler)
+flask-wtf:          Use for form 
 ```
+
+
