@@ -9,8 +9,8 @@ conda create -n web python=3.6.5
 
 source activate web
 
-conda install flask, flask-wtf
- 
+conda install -c conda-forge flask, flask-wtf, flask-sqlalchemy 
+
 ```
 
 # Add conda environment into Pycharm

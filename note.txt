@@ -1,4 +1,4 @@
-#### Form
+#### Form: flask-wtf
 1. To use method on url route, we need to pass: methods to route
     @app.route("/register", methods=['GET', 'POST'])
 
@@ -11,4 +11,76 @@ To make secret you can do by type in terminal:
     import secrets
     secrets.token_hex(16)   -> it will creat 16 random character
 
-4.
+#### Database : flask-sqlalchemy
+1. We use sqlite instead of sql server. Sqlite save our database to file.
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+    ///: relative path
+2. To first create our database file.
+    + Run app
+    + Go to terminal: python  -> from flask_blog import db
+
+>>> db.create_all()
+>>> from flask_blog import User, Post
+>>> user1 = User(username='Corey', email='test1@gmail.com', password='123456789')
+>>> user2 = User(username='ThieuNv', email='test2@gmail.com', password='987654321')
+>>> db.session.add(user1)
+>>> db.session.add(user2)
+>>> db.session.commit()
+
+>>> User.query.all()
+[User('Corey', 'test1@gmail.com', 'default.jpg'), User('ThieuNv', 'test2@gmail.com', 'default.jpg')]
+>>> User.query.first()
+User('Corey', 'test1@gmail.com', 'default.jpg')
+
+>>> User.query.filter_by(username='ThieuNv').all()
+[User('ThieuNv', 'test2@gmail.com', 'default.jpg')]
+>>> User.query.filter_by(username='ThieuNv').first()
+User('ThieuNv', 'test2@gmail.com', 'default.jpg')
+>>> user = User.query.filter_by(username='ThieuNv').first()
+
+>>> user
+User('ThieuNv', 'test2@gmail.com', 'default.jpg')
+>>> user.id
+2
+>>> user = User.query.get(1)
+>>> user
+User('Corey', 'test1@gmail.com', 'default.jpg')
+>>> user.posts
+[]
+>>> user.id
+1
+>>> post1 = Post(title='Blog 1', content='First Post Content!!!', user_id=user.id)
+>>> post2 = Post(title='Blog 2', content='Second Post Content!!!', user_id=user.id)
+>>> db.session.add(post1)
+>>> db.session.add(post2)
+>>> db.session.commit()
+
+>>> user.posts
+[User('Blog 1', '2018-06-14 10:35:39.153030'), User('Blog 2', '2018-06-14 10:35:39.153030')]
+
+>>> for post in user.posts:
+...     print(post.title)
+...
+Blog 1
+Blog 2
+>>> post = Post.query.first()
+>>> post
+User('Blog 1', '2018-06-14 10:35:39.153030')
+>>> post.user_id
+1
+>>> post.author
+User('Corey', 'test1@gmail.com', 'default.jpg')
+
+>>> User.query.all()
+[User('Corey', 'test1@gmail.com', 'default.jpg'), User('ThieuNv', 'test2@gmail.com', 'default.jpg')]
+>>> Post.query.all()
+[User('Blog 1', '2018-06-14 10:35:39.153030'), User('Blog 2', '2018-06-14 10:35:39.153030')]
+
+>>> db.drop_all()
+>>> User.query.all()
+>>> db.create_all()
+>>> User.query.all()
+[]
+
+
+
