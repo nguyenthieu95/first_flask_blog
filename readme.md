@@ -9,7 +9,7 @@ conda create -n web python=3.6.5
 
 source activate web
 
-conda install flask
+conda install flask, flask-wtf
  
 ```
 
@@ -38,4 +38,12 @@ Click run your flask server -> Go to: 127.0.0.1:5000 (or: localhost:5000)  --> Y
 # Debug mode in flask
 Cause we will change content lots of times, so we don't want to restart flask server after any change.
 We will use the debug mode by edit configurations --> choice: FLASK_DEBUG
+
+# Some functions in Flask
+```sh
+render_template:    Use to render our template
+url_for:            Use to find the static url (input is: name of function handler)
+flask-wtf:          Use for form 
+```
+
 

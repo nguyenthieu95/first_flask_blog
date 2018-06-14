@@ -1,0 +1,14 @@
+#### Form
+1. To use method on url route, we need to pass: methods to route
+    @app.route("/register", methods=['GET', 'POST'])
+
+2. f String has just used in python > 3
+flash(f"Account created for user: {form.username.data}!", "success")
+
+3. We need secret key for forms because it's make anyone can not change cookies, session, ... for security
+To make secret you can do by type in terminal:
+    python
+    import secrets
+    secrets.token_hex(16)   -> it will creat 16 random character
+
+4.
