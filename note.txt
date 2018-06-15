@@ -124,4 +124,20 @@ redirect to page which you want to access. So use:
     return redirect(next_page) if next_page else redirect(url_for("home"))
 
 
+##### Update account profile
+1. When you don't update username or email, but still click button update.
+    if email.data != current_user.email:
+--> Check if email equal to current email.
+
+2. Show info into a form when reach to account page
+    In account route:
+        elif request.method == 'GET':
+
+3. Cut image using pillow
+    from PIL import Image
+
+    img = Image.open(form_picture)  # open image first
+    img.thumbnail(output_size)      # cut image using size output
+    img.save(picture_path)          # save image after cut
+
 

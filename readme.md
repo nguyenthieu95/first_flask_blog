@@ -9,7 +9,7 @@ conda create -n web python=3.6.5
 
 source activate web
 
-conda install -c conda-forge flask, flask-wtf, flask-sqlalchemy, flask-bcrypt, flask-login 
+conda install -c conda-forge flask, flask-wtf, flask-sqlalchemy, flask-bcrypt, flask-login, pillow 
 
 ```
 
@@ -46,6 +46,7 @@ url_for:            Use to find the static url (input is: name of function handl
 flask-wtf:          Use for form 
 flask-bcrypt:       Crypt password and check hash password
 flask-login :       Help check user login
+pillow :            Resize image (large --> small)
 ```
 
 
