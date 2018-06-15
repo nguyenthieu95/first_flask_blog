@@ -9,8 +9,8 @@ conda create -n web python=3.6.5
 
 source activate web
 
-conda install flask, flask-wtf
- 
+conda install -c conda-forge flask, flask-wtf, flask-sqlalchemy, flask-bcrypt, flask-login 
+
 ```
 
 # Add conda environment into Pycharm
@@ -44,6 +44,8 @@ We will use the debug mode by edit configurations --> choice: FLASK_DEBUG
 render_template:    Use to render our template
 url_for:            Use to find the static url (input is: name of function handler)
 flask-wtf:          Use for form 
+flask-bcrypt:       Crypt password and check hash password
+flask-login :       Help check user login
 ```
 
 
