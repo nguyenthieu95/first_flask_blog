@@ -82,5 +82,46 @@ User('Corey', 'test1@gmail.com', 'default.jpg')
 >>> User.query.all()
 []
 
+##### Password : flask-bcrypt
+
+>>> from flask_bcrypt import Bcrypt
+>>> bcrypt = Bcrypt()
+>>> bcrypt.generate_password_hash('testing')
+b'$2b$12$6NCAXRxV21yYajFeFfRsI.8yzwUul9tFjaNrM34LrqIP/TPS.uuU2'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$WDHnEOyN8lmUYYdf8skG4uFPdbHRLfCZGR0k96Obp9Jj14P/8I5Ly'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$bCCr1VMCWlW0Ix12HQmL2epeWIc.6GhfkZLG9Oc.3szpiDaTDKS/i'
+>>> hash_pw = bcrypt.generate_password_hash('testing').decode('utf-8')
+
+>>> bcrypt.check_password_hash(hash_pw, 'thieunv')
+False
+>>> bcrypt.check_password_hash(hash_pw, 'testing')
+True
+
+
+
+##### Save user registration to database
+
+1. Check validation based on flask-wtf:
+    def validate_field(self, field):
+        if True:
+            raise ValidationError('Validation Message')
+
+2. Access to private link when already logout. To prevent it.
+    @app.route("/account")
+    @login_required
+
+But first we have to set the view for login_required by in __init__:
+    login_manager.login_view = 'login'      # function name of route
+
+3. To get parameter from url when logged in use:
+    request.args.get('name_of_parameter')
+
+4. When you try to access page without logged in, and then you logged in, It's good if then directly
+redirect to page which you want to access. So use:
+    next_page = request.args.get('next')
+    return redirect(next_page) if next_page else redirect(url_for("home"))
+
 
 
