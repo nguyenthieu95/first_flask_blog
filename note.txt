@@ -188,11 +188,20 @@ itsdangerous.SignatureExpired: Signature expired
 
 
 2. How to set secret environment variable in Ubuntu 16.04
-    Terminal:   nano ~/.bashrc
-    Add:        export DB_USER="google email"
-                export DB_PASS="gooogle password"
-    Saved it and reload bash by:    source ~/.bashrc
-    Use it in secret_variable.py
+    Terminal:   nano ~/.profile
+    Add:        export FLASKBLOG_SECRET_KEY="your key"
+                export FLASKBLOG_SQLALCHEMY_DATABASE_URI="your uri"
+                export FLASKBLOG_EMAIL_USER ="google email"
+                export FLASKBLOG_EMAIL_PASS="gooogle password"
+
+    Saved it and reload bash : Log out and log in again.
+    To test using command: printenv
+
+    SECRET_KEY = os.environ.get("FLASKBLOG_SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("FLASKBLOG_SQLALCHEMY_DATABASE_URI")
+    MAIL_USERNAME = os.environ.get("FLASKBLOG_EMAIL_USER")
+    MAIL_PASSWORD = os.environ.get("FLASKBLOG_EMAIL_PASS")
+
 
 3. When you were sent an email, an error shown up like this
     "smtplib.SMTPSenderRefused: (530, b'5.5.1 Authentication Required. Learn more at\n5.5.1
@@ -202,6 +211,13 @@ Go to: https://support.google.com/accounts/answer/6010255
 Then go to: https://myaccount.google.com/lesssecureapps?pli=1  ==> Changed to : Allowed
 
 May be the error causes of: os.environ.get("EMAIL_USER") -> try to test with real email.
+
+
+#### Creation of app to function --> to create more instances of app with different configuration
+
+Now to create new application with different Config Object we can do by:
+    from flaskblog import create_ap
+    app = create_app(Config_Object)
 
 
 
