@@ -141,3 +141,29 @@ redirect to page which you want to access. So use:
     img.save(picture_path)          # save image after cut
 
 
+#### Pagination
+>>> posts = Post.query.all()
+>>> for post in posts:
+...     print(post)
+
+>>> posts = Post.query.paginate()
+>>> posts
+<flask_sqlalchemy.Pagination object at 0x7f72299590f0>
+>>> dir(posts)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+'__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+'__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'has_next', 'has_prev', 'items', 'iter_pages',
+'next', 'next_num', 'page', 'pages', 'per_page', 'prev', 'prev_num', 'query', 'total']
+>>> posts.per_page
+20
+>>> posts.page
+1
+>>> for post in posts.items:
+...     print(post)
+
+>>> posts = Post.query.paginate(page=2)
+>>> posts = Post.query.paginate(per_page=5)
+>>> posts.total
+26
+
+
