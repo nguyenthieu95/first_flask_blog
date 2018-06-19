@@ -142,6 +142,7 @@ redirect to page which you want to access. So use:
 
 
 #### Pagination
+1. To make pagination work, we could try some method below:
 >>> posts = Post.query.all()
 >>> for post in posts:
 ...     print(post)
@@ -165,5 +166,46 @@ redirect to page which you want to access. So use:
 >>> posts = Post.query.paginate(per_page=5)
 >>> posts.total
 26
+
+
+####### Email and password reset
+1. Serializer object with time for token
+
+>>> from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+>>> s = Serializer('secret', 30)
+>>> token = s.dumps({'user_id': 1}).decode('utf-8')
+>>> token
+'eyJpYXQiOjE1Mjk0MTE3ODAsImV4cCI6MTUyOTQxMTgxMCwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyX2lkIjoxfQ.oIie0IYuj_Lu09LiOB9IjxfCWYfTcHxiLzg8NbbMdMg'
+>>> s
+>>> s.loads(token)
+{'user_id': 1}
+>>> s.loads(token)                      ( expired after 30 seconds)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/thieunv/miniconda2/envs/web/lib/python3.5/site-packages/itsdangerous.py", line 807, in loads
+    date_signed=self.get_issue_date(header))
+itsdangerous.SignatureExpired: Signature expired
+
+
+2. How to set secret environment variable in Ubuntu 16.04
+    Terminal:   nano ~/.bashrc
+    Add:        export DB_USER="google email"
+                export DB_PASS="gooogle password"
+    Saved it and reload bash by:    source ~/.bashrc
+    Use it in secret_variable.py
+
+3. When you were sent an email, an error shown up like this
+    "smtplib.SMTPSenderRefused: (530, b'5.5.1 Authentication Required. Learn more at\n5.5.1
+    https://support.google.com/mail/?p=WantAuthError d23-v6sm267784pfe.2 - gsmtp', 'noreply@demo.com')"
+
+Go to: https://support.google.com/accounts/answer/6010255
+Then go to: https://myaccount.google.com/lesssecureapps?pli=1  ==> Changed to : Allowed
+
+May be the error causes of: os.environ.get("EMAIL_USER") -> try to test with real email.
+
+
+
+
+
 
 

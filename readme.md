@@ -9,7 +9,7 @@ conda create -n web python=3.6.5
 
 source activate web
 
-conda install -c conda-forge flask, flask-wtf, flask-sqlalchemy, flask-bcrypt, flask-login, pillow 
+conda install -c conda-forge flask, flask-wtf, flask-sqlalchemy, flask-bcrypt, flask-login, pillow , flask-mail
 
 ```
 
@@ -47,6 +47,7 @@ flask-wtf:          Use for form
 flask-bcrypt:       Crypt password and check hash password
 flask-login :       Help check user login
 pillow :            Resize image (large --> small)
+flask-mail:         For email send
 ```
 
 
